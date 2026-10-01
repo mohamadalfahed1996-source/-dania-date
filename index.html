@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>موعد دانيا ❤️</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:linear-gradient(135deg,#fff2f6,#f5e7ea);color:#29242a}.app{max-width:520px;margin:auto;min-height:100vh;padding:18px 15px 35px}.card{background:#fffafc;border-radius:28px;padding:22px;box-shadow:0 10px 35px #743d5018;margin-top:14px}.hero{min-height:540px;display:flex;flex-direction:column;justify-content:flex-end;text-align:center;color:#fff;background:linear-gradient(160deg,#4d3855,#ee8298);overflow:hidden}.heart{font-size:42px}.hero h1{font-size:31px;margin:8px 0}.hero p{line-height:1.9;font-size:17px;margin:0 0 24px}h2{font-size:23px;margin:5px 0 17px}.badge{display:inline-block;background:#ffe1e8;color:#a33c57;border-radius:99px;padding:6px 11px;font-size:13px}.options{display:grid;gap:11px}.option{border:1.5px solid #ead8dd;border-radius:17px;padding:16px;background:#fff;cursor:pointer;font-size:16px}.option.selected{border-color:#ed5978;background:#ffe8ee}button{width:100%;border:0;border-radius:18px;background:#ee5878;color:#fff;padding:15px;font-size:17px;cursor:pointer;margin-top:18px}.small{font-size:13px;color:#82747a}.summary{background:#fff;border-radius:20px;padding:15px;line-height:1.8}.row{padding:9px 0;border-bottom:1px solid #f0e5e8}.row:last-child{border:0}.sms{background:#eef0f3;border-radius:20px;padding:15px;color:#222;text-align:right;line-height:1.75}.smshead{font-weight:700;margin-bottom:8px}.note{font-size:13px;color:#806f76;margin-top:12px;line-height:1.7}
+</style>
+</head>
+<body><div class="app" id="app"></div>
+<script>
+const state={};let i=-1;
+const steps=[
+["time","إمتى بتحبي نبلّش يومنا؟",["09:00 صباحاً","10:00 صباحاً","13:00 ظهراً"]],
+["start","شو بتحبي نعمل بالبداية؟",["🥐 فطور","☕ قهوة وسناك","🍽️ غدا"]],
+["mealTiming","بتحبي ناكل قبل الحفلة ولا بعدها؟",["قبل الحفلة","بعد الحفلة","ما عندي فرق"]],
+["food","شو نوع الأكل اللي بتحبيه؟",["🍣 سوشي","🌯 شاورما","🍝 باستا","🍔 برغر","🥩 ستيك","🥘 مأكولات شرقية","🦐 مأكولات بحرية","✨ أي شي"]],
+["restaurant","اختاري المطعم",["Sushi Yama • Kungsträdgården","Minako • Östermalm","Ichiban Sushi • Södermalm","Tehran Grill • Odenplan","Shawarma Bar • Södermalm","Pasta Bar • Vasastan"]],
+["concert","الحفلة 🎤 آدم",["❤️ تمام! • السبت 17 أكتوبر 2026 • حوالي 15:00 • Cirkus Stockholm"]],
+["after","بعد الحفلة، شو بتحبي نعمل؟",["🎳 بولينغ","⛳ ميني غولف","🎱 بلياردو","🎮 ألعاب أركيد","🎤 كاريوكي","🏎️ سباق سيارات","🍦 بوظة / آيس كريم","☕ قهوة وحلو"]],
+["last","وبعدها؟ ❤️",["🚶‍♀️ تمشاية بالمدينة","🌃 إطلالة ومنظر جميل","📸 صور سوا","🍰 حلو بالليل","🎁 خلي مجد يختار المفاجأة"]]
+];
+const labels={time:"وقت البداية",start:"البداية",mealTiming:"توقيت الأكل",food:"نوع الأكل",restaurant:"المطعم",concert:"الحفلة",after:"بعد الحفلة",last:"آخر اختيار"};
+function render(){
+if(i<0){app.innerHTML=`<div class="card hero"><div class="heart">💕</div><h1>مرحباً دانيا</h1><p>بدي يوم 17 أكتوبر يكون يوم مميز لإلك،<br>وأحلى يوم بحياتك إن شاء الله ❤️<br>خلينا نخططله سوا، وإنتِ اختاري كل تفصيل.</p><button onclick="next()">يلا نبلّش ✨</button></div>`;return}
+if(i>=steps.length){summary();return}
+let [k,t,opts]=steps[i];
+app.innerHTML=`<div class="card"><span class="badge">خطوة ${i+1} من ${steps.length}</span><h2>${t}</h2><p class="small">اختاري خيار واحد وبعدين منكمّل ❤️</p><div class="options">${opts.map((x,n)=>`<div class="option" id="o${n}" onclick="pick(${n})">${x}</div>`).join("")}</div></div>`;
+}
+function next(){i++;render()}
+function pick(n){state[steps[i][0]]=steps[i][2][n];document.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));document.getElementById("o"+n).classList.add("selected");setTimeout(next,180)}
+function summary(){
+let rows=Object.entries(state).map(([k,v])=>`<div class="row"><b>${labels[k]}</b><br>${v}</div>`).join("");
+app.innerHTML=`<div class="card"><div style="text-align:center"><div class="heart">❤️</div><h2>خطة يومنا</h2><p class="small">دانيا • السبت 17 أكتوبر 2026 • ستوكهولم</p></div><div class="summary">${rows}</div><h2 style="margin-top:24px">📱 معاينة الـSMS</h2><div class="sms"><div class="smshead">موعدنا ❤️</div>دانيا اختارت:<br>${Object.entries(state).map(([k,v])=>`• ${labels[k]}: ${v}`).join("<br>")}<br><br>📍 Cirkus Stockholm<br>🎤 حفلة آدم • حوالي 15:00</div><p class="note">بالنسخة النهائية منربط الإرسال حتى توصلك الرسالة فعلياً على رقمك بعد ما تخلص دانيا الاختيارات.</p><button onclick="i=-1;Object.keys(state).forEach(k=>delete state[k]);render()">جرّب من جديد</button></div>`;
+}
+render();
+</script>
+</body>
+</html>
